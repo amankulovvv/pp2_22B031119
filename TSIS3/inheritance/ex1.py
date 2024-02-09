@@ -1,3 +1,1 @@
-class 
-Student(Person)
-:
+class Student(Person):
