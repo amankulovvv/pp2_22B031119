@@ -1,41 +1,40 @@
 import pygame
-pygame.init()
+pygame.init()  # Инициализация Pygame. Эта функция должна быть вызвана перед использованием других функций Pygame.
 
-W = 500
-H = 500
+W = 500  # Ширина окна. Задаем ширину окна в пикселях.
+H = 500  # Высота окна. Задаем высоту окна в пикселях.
 
-sc = pygame.display.set_mode((W, H))
-pygame.display.set_caption("Back To The Past")
+sc = pygame.display.set_mode((W, H))  # Создание окна. Устанавливаем размер окна (ширина и высота) и сохраняем его в переменную sc.
+pygame.display.set_caption("Back To The Past")  # Установка заголовка окна. Устанавливаем заголовок окна на "Back To The Past".
 
-FPS = pygame.time.Clock()
-x, y = W // 2, H // 2
-speed = 5
+FPS = pygame.time.Clock()  # Создание объекта Clock для управления FPS. Этот объект позволяет контролировать частоту кадров в игре.
+x, y = W // 2, H // 2  # Начальные координаты круга. Устанавливаем начальное положение круга в центр окна.
+speed = 5  # Скорость перемещения. Определяем скорость перемещения круга.
 
-# Define background color
-background_color = (0, 0, 255)  # Use blue background
+# Определение цвета фона (белый)
+background_color = (255, 255, 255)
 
+# Основной игровой цикл
 while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            exit()
+    for event in pygame.event.get():  # Обработка событий. Получаем все события, произошедшие с момента последнего обновления экрана.
+        if event.type == pygame.QUIT:  # Если пользователь закрыл окно
+            pygame.quit()  # Завершение Pygame. Освобождаем ресурсы Pygame.
+            exit()  # Выход из программы. Завершаем выполнение программы.
 
-    keys = pygame.key.get_pressed()
+    keys = pygame.key.get_pressed()  # Получение состояния клавиш. Получаем список всех клавиш, которые в данный момент нажаты.
 
-    if keys[pygame.K_UP]:
-        y -= speed
-    elif keys[pygame.K_DOWN]:
-        y += speed
-    elif keys[pygame.K_LEFT]:
-        x -= speed
-    elif keys[pygame.K_RIGHT]:
-        x += speed
+    # Проверка нажатия клавиш со стрелками и перемещение круга
+    if keys[pygame.K_UP]:  # Если нажата клавиша со стрелкой вверх
+        y -= speed  # Уменьшаем координату y для перемещения круга вверх.
+    elif keys[pygame.K_DOWN]:  # Если нажата клавиша со стрелкой вниз
+        y += speed  # Увеличиваем координату y для перемещения круга вниз.
+    elif keys[pygame.K_LEFT]:  # Если нажата клавиша со стрелкой влево
+        x -= speed  # Уменьшаем координату x для перемещения круга влево.
+    elif keys[pygame.K_RIGHT]:  # Если нажата клавиша со стрелкой вправо
+        x += speed  # Увеличиваем координату x для перемещения круга вправо.
 
-    # Draw background
-    sc.fill(background_color)
+    sc.fill(background_color)  # Заливка окна цветом фона. Заполняем всё окно заданным цветом фона.
+    pygame.draw.circle(sc, (255, 0, 0), (x, y), 25)  # Рисование красного круга. Рисуем красный круг в текущем положении (x, y) с радиусом 25 пикселей.
+    pygame.display.update()  # Обновление экрана. Обновляем содержимое окна.
 
-    # Draw circle
-    pygame.draw.circle(sc, (255, 0, 0), (x, y), 25)
-
-    pygame.display.update()
-
-    FPS.tick(60)
+    FPS.tick(60)  # Ограничение FPS до 60 кадров в секунду. Это гарантирует, что игра будет работать с заданной частотой кадров.
